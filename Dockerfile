@@ -1,4 +1,4 @@
-FROM ruby:2.2.1
+FROM ruby:2.1.2
 
 RUN apt-get update -qq && apt-get install -y build-essential npm nodejs-legacy
 
