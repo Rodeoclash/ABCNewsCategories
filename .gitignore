@@ -11,7 +11,5 @@
 /log/*
 !/log/.keep
 /tmp
-Dockerfile
-docker-compose.yml
 *.sublime-project
 *.sublime-workspace
