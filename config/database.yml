@@ -5,28 +5,12 @@ default: &default
 
 development:
   <<: *default
-  database: buskerapp_development
+  database: abcnews_development
 
 test:
   <<: *default
-  database: buskerapp_test
+  database: abcnews_test
 
 production:
   <<: *default
-  database: buskerapp_production
-default: &default
-  adapter: postgresql
-  encoding: utf8
-  url: <%= ENV['DATABASE_URL'] %>
-
-development:
-  <<: *default
-  database: development
-
-test:
-  <<: *default
-  database: test
-
-production:
-  <<: *default
-  database: production
+  database: abcnews_production

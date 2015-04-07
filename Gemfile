@@ -6,6 +6,7 @@ gem 'puma', '~> 2.11.1'
 gem 'foreman', '~> 0.78.0'
 gem 'rails_12factor', '~> 0.0.3'
 gem 'nokogiri', '~> 1.6.6.2'
+gem "bugsnag"
 
 group :development, :test do
   gem 'byebug', '~> 4.0.5'

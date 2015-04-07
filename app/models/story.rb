@@ -4,7 +4,7 @@ class Story < ActiveRecord::Base
   after_save :get_remote_content
 
   def permalink
-    details["permalinkUrl"]
+    superfeedr_details["permalinkUrl"]
   end
 
   def remote_content
