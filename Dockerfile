@@ -12,4 +12,4 @@ RUN mkdir /app
 WORKDIR /app
 ADD . /app
 
-COMMAND foreman start
+CMD foreman start -f Procfile
