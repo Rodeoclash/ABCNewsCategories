@@ -11,3 +11,5 @@ RUN npm install localtunnel -g
 RUN mkdir /app
 WORKDIR /app
 ADD . /app
+
+COMMAND foreman start
