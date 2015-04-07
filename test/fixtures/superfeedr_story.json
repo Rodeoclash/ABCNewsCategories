@@ -1,0 +1,120 @@
+{
+    "status": {
+        "code": 200,
+        "http": "Fetched (ring) 200 900 and parsed 0/250 entries",
+        "nextFetch": 1428316928,
+        "period": 900,
+        "lastFetch": 1428316027,
+        "lastParse": 1428316028,
+        "lastMaintenanceAt": 1428284662,
+        "feed": "http://www.abc.net.au/news/feed/51120/rss.xml"
+    },
+    "title": "Just In",
+    "updated": null,
+    "id": "",
+    "items": [
+        {
+            "id": "http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584",
+            "published": 1428189676,
+            "updated": 1428189676,
+            "title": "Sawmill fire was deliberate, SA authorities say",
+            "summary": "\\u003cp\\u003eA potentially toxic fire at a disused sawmill at Jamestown in South Australia was started deliberately, fire authorities say.\\u003c/p\\u003e",
+            "permalinkUrl": "http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584",
+            "standardLinks": {
+                "alternate": [
+                    {
+                        "title": "Sawmill fire was deliberate, SA authorities say",
+                        "rel": "alternate",
+                        "href": "http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584",
+                        "type": "text/html"
+                    }
+                ],
+                "enclosure": [
+                    {
+                        "title": "Sawmill fire was deliberate, SA authorities say",
+                        "rel": "enclosure",
+                        "href": "http://www.abc.net.au/news/image/4291094-16x9-2150x1210.jpg",
+                        "type": "image/jpeg"
+                    },
+                    {
+                        "title": "Sawmill fire was deliberate, SA authorities say",
+                        "rel": "enclosure",
+                        "href": "http://www.abc.net.au/news/image/4291094-4x3-940x705.jpg",
+                        "type": "image/jpeg"
+                    },
+                    {
+                        "title": "Sawmill fire was deliberate, SA authorities say",
+                        "rel": "enclosure",
+                        "href": "http://www.abc.net.au/news/image/4291094-3x2-940x627.jpg",
+                        "type": "image/jpeg"
+                    },
+                    {
+                        "title": "Sawmill fire was deliberate, SA authorities say",
+                        "rel": "enclosure",
+                        "href": "http://www.abc.net.au/news/image/4291094-3x4-940x1253.jpg",
+                        "type": "image/jpeg"
+                    },
+                    {
+                        "title": "Sawmill fire was deliberate, SA authorities say",
+                        "rel": "enclosure",
+                        "href": "http://www.abc.net.au/news/image/4291094-1x1-1400x1400.jpg",
+                        "type": "image/jpeg"
+                    }
+                ],
+                "thumbnail": [
+                    {
+                        "title": "Sawmill fire was deliberate, SA authorities say",
+                        "rel": "thumbnail",
+                        "href": "http://www.abc.net.au/news/image/4291094-4x3-140x105.jpg",
+                        "type": "image/jpeg"
+                    }
+                ]
+            },
+            "categories": [
+                "Fires",
+                "Disasters and Accidents",
+                "Arson"
+            ],
+            "source": {
+                "id": "just-in-nan-nan-nan-nan",
+                "title": "Just In",
+                "permalinkUrl": "http://www.abc.net.au/news/justin/",
+                "standardLinks": {
+                    "alternate": [
+                        {
+                            "title": "Just In",
+                            "rel": "alternate",
+                            "href": "http://www.abc.net.au/news/justin/",
+                            "type": "text/html"
+                        }
+                    ],
+                    "image": [
+                        {
+                            "title": "ABC News",
+                            "rel": "image",
+                            "href": "http://www.abc.net.au/news/image/4571064-1x1-144x144.png",
+                            "type": "image/png"
+                        }
+                    ],
+                    "superfeedr": [
+                        {
+                            "title": "",
+                            "rel": "superfeedr",
+                            "href": "http://www.abc.net.au/news/feed/51120/rss.xml"
+                        }
+                    ]
+                },
+                "image": "http://www.abc.net.au/news/image/4571064-1x1-144x144.png",
+                "categories": [
+                    "Australian Broadcasting Corporation: All content"
+                ]
+            },
+            "language": "en"
+        }
+    ],
+    "controller": "stories",
+    "action": "create",
+    "story": {
+        "id": ""
+    }
+}
