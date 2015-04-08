@@ -139,7 +139,7 @@ PLATFORMS
 DEPENDENCIES
   bugsnag
   byebug (~> 4.0.5)
-  delayed_job_active_record
+  delayed_job_active_record (~> 4.0.3)
   foreman (~> 0.78.0)
   nokogiri (~> 1.6.6.2)
   pg (~> 0.18.1)
