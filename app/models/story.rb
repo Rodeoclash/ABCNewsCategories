@@ -4,7 +4,7 @@ class Story < ActiveRecord::Base
   after_save :get_remote_content
 
   def permalink
-    superfeedr_details["permalinkUrl"]
+    details["permalinkUrl"]
   end
 
   def remote_content
@@ -14,10 +14,7 @@ class Story < ActiveRecord::Base
   private
 
   def get_remote_content
-    if content.nil?
-      self.content = remote_content
-      self.save!
-    end
+    GetStoryContentJob.perform_later self.id
   end
 
 end
