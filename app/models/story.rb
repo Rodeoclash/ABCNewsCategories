@@ -8,7 +8,7 @@ class Story < ActiveRecord::Base
   end
 
   def remote_content
-    Nokogiri::HTML(open(permalink)).css(".article > p:not(.published):not(.topics)").map(&:content).join("\n").encode('UTF-8', {:invalid => :replace, :undef => :replace, :replace => '?'})
+    Nokogiri::HTML(open(permalink)).css(".article > p:not(.published):not(.topics)").map(&:content).join("\n").force_encoding(Encoding::UTF_8)
   end
 
   private
