@@ -3,7 +3,7 @@ details: &details
     id: "http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584"
     published: 1428189676
     updated: 1428189676
-    title: "Sawmill fire was deliberate, SA authorities say"
+    title: "Sawmill fire was deliberate, SA authorities say. Â"
     summary: "\\u003cp\\u003eA potentially toxic fire at a disused sawmill at Jamestown in South Australia was started deliberately, fire authorities say.\\u003c/p\\u003e"
     permalinkUrl: "http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584"
     standardLinks: 
@@ -83,11 +83,11 @@ details_no_text_no_analysis:
 
 details_text_no_analysis:
   <<: *details
-  text: "Some content that was fetched from remote server"
+  text: "Some content that was fetched from remote server. Â"
   analysis: ~
 
 details_text_analysis:
   <<: *details
-  text: "Some content that was fetched from remote server"
+  text: "Some content that was fetched from remote server. Â"
   analysis: >
     {"todo":"this"}

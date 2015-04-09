@@ -1,6 +1,7 @@
 require 'open-uri'
 
 class Story < ActiveRecord::Base
+  after_find :encode_text
   after_save :queue_get_remote_text
   after_save :queue_analysis_send
 
@@ -9,9 +10,7 @@ class Story < ActiveRecord::Base
   end
 
   def remote_text
-    Nokogiri::HTML(open(permalink)).css(".article > p:not(.published):not(.topics)").map(&:content).map { |str|
-      str.encode('UTF-8', {:invalid => :replace, :undef => :replace, :replace => '?'})
-    }.join("\n")
+    Nokogiri::HTML(open(permalink)).css(".article > p:not(.published):not(.topics)").map(&:content).join("\n")
   end
 
   def semantria_session
@@ -30,6 +29,13 @@ class Story < ActiveRecord::Base
   end
 
   private
+
+  # This is a terrible hack, it should be UTF-8 in the database anyway
+  def encode_text
+    if self.text
+      self.text = self.text.encode('UTF-8', :invalid => :replace, :undef => :replace)
+    end
+  end
 
   def queue_get_remote_text
     if self.details && self.text.nil?
