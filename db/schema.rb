@@ -34,7 +34,8 @@ ActiveRecord::Schema.define(version: 20150408051339) do
 
   create_table "stories", force: :cascade do |t|
     t.json     "details",    null: false
-    t.binary   "content"
+    t.json     "analysis"
+    t.binary   "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

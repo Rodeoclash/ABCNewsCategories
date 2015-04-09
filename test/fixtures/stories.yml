@@ -1,6 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
+details: &details
   details:
     id: "http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584"
     published: 1428189676
@@ -77,3 +75,19 @@ one:
       categories: 
         - "Australian Broadcasting Corporation: All content"
     language: "en"
+
+details_no_text_no_analysis:
+  <<: *details
+  text: ~
+  analysis: ~
+
+details_text_no_analysis:
+  <<: *details
+  text: "Some content that was fetched from remote server"
+  analysis: ~
+
+details_text_analysis:
+  <<: *details
+  text: "Some content that was fetched from remote server"
+  analysis: >
+    {"todo":"this"}

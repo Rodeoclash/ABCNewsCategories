@@ -4,19 +4,36 @@ class StoryTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
   
   test "@permalink" do
-    assert(stories(:one).permalink == 'http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584')
+    assert(stories(:details_no_text_no_analysis).permalink == 'http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584')
   end
 
   test "@article_content" do
     stub_requests
-    assert(stories(:one).remote_content == 'Fire has damaged a $3 million dining car of The Ghan at the main Adelaide interstate rail terminal at Keswick.')
+    assert(stories(:details_no_text_no_analysis).remote_text == 'Fire has damaged a $3 million dining car of The Ghan at the main Adelaide interstate rail terminal at Keswick.')
   end
 
-  test "@get_remote_content" do
+  # sends for content
+  test "@queue_get_remote_content_with_details_no_content_no_analysis" do
     stub_requests
-    story = stories(:one)
+    story = stories(:details_no_text_no_analysis)
     story.save!
     assert_enqueued_jobs 1
+  end
+
+  # sends for analysis
+  test "@queue_analysis_send_with_details_content_no_analysis" do
+    stub_requests
+    story = stories(:details_text_no_analysis)
+    story.save!
+    assert_enqueued_jobs 1
+  end
+
+  # all sends complete
+  test "@queue_analysis_send_with_details_content_analysis" do
+    stub_requests
+    story = stories(:details_text_analysis)
+    story.save!
+    assert_enqueued_jobs 0
   end
 
 end
