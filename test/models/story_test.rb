@@ -9,7 +9,9 @@ class StoryTest < ActiveSupport::TestCase
 
   test "@remote_text" do
     stub_requests
-    assert(stories(:details_no_text_no_analysis).remote_text == 'Fire has damaged a $3 million dining car of The Ghan at the main Adelaide interstate rail terminal at Keswick.')
+    story = stories(:details_no_text_no_analysis)
+    story.get_remote_text
+    assert(story.text == 'Fire has damaged a $3 million dining car of The Ghan at the main Adelaide interstate rail terminal at Keswick.')
   end
 
   test "@send_analysis" do

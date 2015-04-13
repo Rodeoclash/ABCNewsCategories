@@ -3,6 +3,6 @@ class GetAnalysisJob < ActiveJob::Base
 
   def perform(story_id)
     story = Story.find(story_id)   
-    story.analysis_get
+    story.get_analysis
   end
 end
