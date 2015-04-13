@@ -14,7 +14,7 @@ class Story < ActiveRecord::Base
 
   def send_analysis
     self.update_attribute(:semantria_id, SemantriaWrapper.send_analysis(text))
-    GetAnalysisJob.set(wait: 5.minutes).perform_later(self.id)
+    GetAnalysisJob.set(wait: 15.seconds).perform_later(self.id)
   end
 
   def get_analysis
