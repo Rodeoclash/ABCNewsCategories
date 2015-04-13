@@ -3,7 +3,6 @@ class GetStoryTextJob < ActiveJob::Base
 
   def perform(story_id)
     story = Story.find(story_id)   
-    story.text = story.remote_text
-    story.save!
+    story.get_remote_text
   end
 end

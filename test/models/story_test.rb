@@ -20,17 +20,10 @@ class StoryTest < ActiveSupport::TestCase
     assert_enqueued_jobs 1
   end
 
-  test "@get_analysis_ready" do
-    stub_request(:get, /api\.semantria/).
-      to_return(:status => 200, :body => File.open("#{Rails.root}/test/fixtures/story_analysis_ready.json").read)
+  test "@get_analysis" do
     story = stories(:details_text_sent_for_analysis)
     story.get_analysis
-    #assert(story.semantria_id.blank? != true)
-    #assert_enqueued_jobs 1
-  end
-
-  test "@get_analysis_not_ready" do
-
+    assert(story.analysis['id'] == story.semantria_id)
   end
 
   # sends for content

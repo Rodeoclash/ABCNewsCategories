@@ -1,5 +1,6 @@
 require 'semantria'
 require 'securerandom'
+require 'awesome_print'
 
 module SemantriaWrapper
 
@@ -17,9 +18,9 @@ module SemantriaWrapper
   end
 
   def self.get_analysis(uuid)
-    results = self.session.getProcessedDocuments
-    puts "----- results"
-    puts results.inspect
+    self.session.getProcessedDocuments.find {|doc|
+      doc['id'] == uuid
+    }
   end
 
 end

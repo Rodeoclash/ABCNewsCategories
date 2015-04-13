@@ -8,8 +8,8 @@ class Story < ActiveRecord::Base
     details["permalinkUrl"]
   end
 
-  def remote_text
-    Nokogiri::HTML(open(permalink)).css(".article > p:not(.published):not(.topics)").map(&:content).join("\n")
+  def get_remote_text
+    self.update_attribute(:text, Nokogiri::HTML(open(permalink)).css(".article > p:not(.published):not(.topics)").map(&:content).join("\n"))
   end
 
   def send_analysis
@@ -18,7 +18,7 @@ class Story < ActiveRecord::Base
   end
 
   def get_analysis
-    SemantriaWrapper.get_analysis(semantria_id)
+    self.update_attribute(:analysis, SemantriaWrapper.get_analysis(semantria_id))
   end
 
   private

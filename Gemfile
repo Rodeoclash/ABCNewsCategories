@@ -1,4 +1,4 @@
-ruby '2.1.2'
+ruby '2.2.1'
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.1'
@@ -9,6 +9,7 @@ gem 'rails_12factor', '~> 0.0.3'
 gem 'nokogiri', '~> 1.6.6.2'
 gem 'bugsnag'
 gem 'delayed_job_active_record', '~> 4.0.3'
+gem 'awesome_print', '1.6.1'
 
 group :development, :test do
   gem 'byebug', '~> 4.0.5'
