@@ -18,7 +18,7 @@ class Story < ActiveRecord::Base
   end
 
   def get_analysis
-    self.analysis = SemantriaWrapper.get_analysis(semantria_id)
+    SemantriaWrapper.get_analysis(semantria_id)
   end
 
   private

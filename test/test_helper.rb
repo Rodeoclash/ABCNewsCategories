@@ -9,11 +9,14 @@ class ActiveSupport::TestCase
   fixtures :all
 
   def stub_requests
-    stub_request(:get, 'http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584').
+    stub_request(:get, /www.abc.net.au/).
       to_return(:status => 200, :body => File.open("#{Rails.root}/test/fixtures/acb_newsitem.html").read)
 
     stub_request(:post, /api\.semantria/).
       to_return(:status => 202)
+
+    stub_request(:get, /api\.semantria/).
+      to_return(:status => 200, :body => File.open("#{Rails.root}/test/fixtures/story_analysis.json").read)
   end
 
 end

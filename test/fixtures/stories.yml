@@ -86,9 +86,15 @@ details_text_no_analysis:
   text: "Some content that was fetched from remote server. Â"
   analysis: ~
 
+details_text_sent_for_analysis:
+  <<: *details
+  text: "Some content that was fetched from remote server. Â"
+  semantria_id: "61bb802e-5f1a-4b91-86a7-1cc5ace2d928"
+  analysis: ~
+
 details_text_analysis:
   <<: *details
   text: "Some content that was fetched from remote server. Â"
-  semantria_id: "418e2ae8-b14a-40b9-99ec-5197e2c4a982"
+  semantria_id: "61bb802e-5f1a-4b91-86a7-1cc5ace2d928"
   analysis: >
     {"todo":"this"}

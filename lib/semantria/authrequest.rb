@@ -49,9 +49,6 @@ module Semantria
       request = get_request(method, path, headers, post_data)
       response = conn.request(request)
 
-      puts "--- raw response"
-      puts response.inspect
-
       data = nil
       if response.header['Content-Encoding'].eql? 'gzip'
         sio = StringIO.new( response.body )
