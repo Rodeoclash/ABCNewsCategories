@@ -3,13 +3,12 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.1'
 gem 'pg', '~> 0.18.1'
-gem 'puma', '~> 2.11.1'
+gem 'puma', '2.11.1'
 gem 'foreman', '~> 0.78.0'
 gem 'rails_12factor', '~> 0.0.3'
 gem 'nokogiri', '~> 1.6.6.2'
 gem 'bugsnag'
 gem 'delayed_job_active_record', '~> 4.0.3'
-#gem 'semantria_sdk', '~> 3.0.70'
 
 group :development, :test do
   gem 'byebug', '~> 4.0.5'

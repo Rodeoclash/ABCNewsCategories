@@ -89,5 +89,6 @@ details_text_no_analysis:
 details_text_analysis:
   <<: *details
   text: "Some content that was fetched from remote server. Â"
+  semantria_id: "418e2ae8-b14a-40b9-99ec-5197e2c4a982"
   analysis: >
     {"todo":"this"}
