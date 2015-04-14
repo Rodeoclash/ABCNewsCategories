@@ -12,8 +12,12 @@ class Story < ActiveRecord::Base
     self.update_attribute(:text, Nokogiri::HTML(open(permalink)).css(".article > p:not(.published):not(.topics)").map(&:content).join("\n"))
   end
 
+  def analysis_corpus
+    text[0..7999]
+  end
+
   def send_analysis
-    self.update_attribute(:semantria_id, SemantriaWrapper.send_analysis(text))
+    self.update_attribute(:semantria_id, SemantriaWrapper.send_analysis(analysis_corpus))
     GetAnalysisJob.set(wait: 15.seconds).perform_later(self.id)
   end
 

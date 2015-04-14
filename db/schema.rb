@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 20150408051339) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "stories", force: :cascade do |t|
-    t.json     "details",    null: false
-    t.json     "analysis"
-    t.binary   "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.jsonb    "details",      null: false
+    t.jsonb    "analysis"
+    t.text     "text"
+    t.uuid     "semantria_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end

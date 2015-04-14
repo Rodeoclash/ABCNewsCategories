@@ -7,6 +7,13 @@ class StoryTest < ActiveSupport::TestCase
     assert(stories(:details_no_text_no_analysis).permalink == 'http://www.abc.net.au/news/2015-04-05/sawmill-fire-at-jamestown-deliberate-ghan-rail-keswick/6371584')
   end
 
+  test "@analysis_corpus" do
+    story = stories(:details_text_no_analysis)
+    assert(story.analysis_corpus == story.text)
+    story.text = (0...10000).map { (65 + rand(26)).chr }.join
+    assert(story.analysis_corpus.size == 8000)
+  end
+
   test "@remote_text" do
     stub_requests
     story = stories(:details_no_text_no_analysis)
