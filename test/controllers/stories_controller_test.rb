@@ -23,7 +23,7 @@ class StoriesControllerTest < ActionController::TestCase
     story_1 = Story.create!({details: {}, text: 'Story 1'})
     sleep 0.1
     story_2 = Story.create!({details: {}, text: 'Story 2'})
-    get(:index, format: :json, limit: 1, page: 0)
+    get(:index, format: :json, limit: "1", page: "0")
     assert_response :success
     parsed_response = JSON.parse(response.body)
     assert(parsed_response.size == 1)
@@ -34,7 +34,7 @@ class StoriesControllerTest < ActionController::TestCase
     story_1 = Story.create!({details: {}, text: 'Story 1'})
     sleep 0.1
     story_2 = Story.create!({details: {}, text: 'Story 2'})
-    get(:index, format: :json, limit: 1, page: 1)
+    get(:index, format: :json, limit: "1", page: "1")
     assert_response :success
     parsed_response = JSON.parse(response.body)
     assert(parsed_response.size == 1)

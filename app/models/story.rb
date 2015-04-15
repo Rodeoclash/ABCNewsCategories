@@ -5,7 +5,7 @@ class Story < ActiveRecord::Base
   after_save :queue_analysis_send
 
   default_scope { order('created_at DESC') }
-  scope :paginated, -> (limit, page) { limit(limit || 10).offset((page || 0) * (limit || 10)) }
+  scope :paginated, -> (limit, page) { limit(limit && limit.to_i || 10).offset((page && page.to_i || 0) * (limit && limit.to_i || 10)) }
 
   def permalink
     details["permalinkUrl"]
