@@ -30,6 +30,7 @@ class StoryTest < ActiveSupport::TestCase
   end
 
   test "@get_analysis" do
+    stub_requests
     story = stories(:details_text_sent_for_analysis)
     story.get_analysis
     assert(story.analysis['id'] == story.semantria_id)

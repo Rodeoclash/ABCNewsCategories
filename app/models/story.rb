@@ -4,6 +4,9 @@ class Story < ActiveRecord::Base
   after_save :queue_get_remote_text
   after_save :queue_analysis_send
 
+  default_scope { order('created_at DESC') }
+  scope :paginated, -> (limit, page) { limit(limit || 10).offset((page || 0) * (limit || 10)) }
+
   def permalink
     details["permalinkUrl"]
   end
