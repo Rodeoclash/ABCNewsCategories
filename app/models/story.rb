@@ -4,6 +4,10 @@ class Story < ActiveRecord::Base
   after_save :queue_get_remote_text
   after_save :queue_analysis_send
 
+  validates_presence_of :details
+
+  has_many :users, through: :story_user
+
   default_scope { order('created_at DESC') }
   scope :paginated, -> (limit, page) { limit(limit && limit.to_i || 10).offset((page && page.to_i || 0) * (limit && limit.to_i || 10)) }
 

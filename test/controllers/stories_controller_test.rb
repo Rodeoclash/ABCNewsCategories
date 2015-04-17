@@ -8,10 +8,24 @@ class StoriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'GET index - order' do
-    story_1 = Story.create!({details: {}, text: 'Story 1'})
+  test 'GET index - without token' do
+    get(:index, nil)
+    assert_response :unauthorized
+  end
+
+  test 'GET index - with token' do
+    user = User.create!
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(user.auth_token)
+    get(:index, {format: :json})
+    assert_response :success
+  end
+
+  test 'GET index - defaults' do
+    user = User.create!
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(user.auth_token)
+    story_1 = Story.create!({details: {something: 'here'}, text: 'Story 1'})
     sleep 0.1
-    story_2 = Story.create!({details: {}, text: 'Story 2'})
+    story_2 = Story.create!({details: {something: 'here'}, text: 'Story 2'})
     get(:index, format: :json)
     assert_response :success
     parsed_response = JSON.parse(response.body)
@@ -20,9 +34,11 @@ class StoriesControllerTest < ActionController::TestCase
   end
 
   test 'GET index - pagination 1' do
-    story_1 = Story.create!({details: {}, text: 'Story 1'})
+    user = User.create!
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(user.auth_token)
+    story_1 = Story.create!({details: {something: 'here'}, text: 'Story 1'})
     sleep 0.1
-    story_2 = Story.create!({details: {}, text: 'Story 2'})
+    story_2 = Story.create!({details: {something: 'here'}, text: 'Story 2'})
     get(:index, format: :json, limit: "1", page: "0")
     assert_response :success
     parsed_response = JSON.parse(response.body)
@@ -31,14 +47,32 @@ class StoriesControllerTest < ActionController::TestCase
   end
 
   test 'GET index - pagination 2' do
-    story_1 = Story.create!({details: {}, text: 'Story 1'})
+    user = User.create!
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(user.auth_token)
+    story_1 = Story.create!({details: {something: 'here'}, text: 'Story 1'})
     sleep 0.1
-    story_2 = Story.create!({details: {}, text: 'Story 2'})
+    story_2 = Story.create!({details: {something: 'here'}, text: 'Story 2'})
     get(:index, format: :json, limit: "1", page: "1")
     assert_response :success
     parsed_response = JSON.parse(response.body)
     assert(parsed_response.size == 1)
     assert(parsed_response[0]['text'] == 'Story 1')
+  end
+
+  test 'POST interest - with interest value' do
+    user = User.create!
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(user.auth_token)
+    story = Story.create!({details: {something: 'here'}, text: 'Story 1'})
+    post(:interest, {format: :json, story_id: story.id, user_id: user.id, interest: 0.8})
+    assert_response :success
+  end
+
+  test 'POST interest - without interest value' do
+    user = User.create!
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(user.auth_token)
+    story = Story.create!({details: {something: 'here'}, text: 'Story 1'})
+    post(:interest, {format: :json, story_id: story.id, user_id: user.id})
+    assert_response 422
   end
   
 end
