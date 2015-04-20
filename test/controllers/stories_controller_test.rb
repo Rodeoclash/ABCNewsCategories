@@ -31,7 +31,6 @@ class StoriesControllerTest < ActionController::TestCase
     parsed_response = JSON.parse(response.body)
     assert(parsed_response['stories'][0]['text'] == 'Story 2')
     assert(parsed_response['stories'][1]['text'] == 'Story 1')
-    assert(parsed_response['meta']['total'] == 2)
   end
 
   test 'GET index - pagination 1' do
@@ -43,9 +42,8 @@ class StoriesControllerTest < ActionController::TestCase
     get(:index, format: :json, limit: "1", page: "0")
     assert_response :success
     parsed_response = JSON.parse(response.body)
-    assert(parsed_response.size == 1)
+    assert(parsed_response['stories'].size == 1)
     assert(parsed_response['stories'][0]['text'] == 'Story 2')
-    assert(parsed_response['meta']['total'] == 2)
   end
 
   test 'GET index - pagination 2' do
@@ -57,9 +55,8 @@ class StoriesControllerTest < ActionController::TestCase
     get(:index, format: :json, limit: "1", page: "1")
     assert_response :success
     parsed_response = JSON.parse(response.body)
-    assert(parsed_response.size == 1)
+    assert(parsed_response['stories'].size == 1)
     assert(parsed_response['stories'][0]['text'] == 'Story 1')
-    assert(parsed_response['meta']['total'] == 2)
   end
 
   test 'POST interest - with interest value' do
