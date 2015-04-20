@@ -11,8 +11,6 @@ class ApplicationController < ActionController::Base
   protected
 
     def authenticate
-      #puts "====="
-      #puts request.headers.inspect
       if user = authenticate_with_http_token { |token, options| User.authenticate(token, options) }
         @current_user = user
       else
