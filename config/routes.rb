@@ -4,4 +4,9 @@ Rails.application.routes.draw do
   resources :stories do
     post :interest
   end
+
+  root to: 'application#main'
+
+  #target/client/goog/
+
 end

@@ -9,7 +9,9 @@ gem 'rails_12factor', '~> 0.0.3'
 gem 'nokogiri', '~> 1.6.6.2'
 gem 'delayed_job_active_record', '~> 4.0.3'
 gem 'awesome_print', '1.6.1'
-gem 'bugsnag'
+gem 'sass-rails', '5.0.3'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'active_model_serializers', '0.8.3'
 
 group :development, :test do
   gem 'byebug', '~> 4.0.5'
@@ -21,4 +23,8 @@ group :test do
   gem 'timecop', '~> 0.7.3'
   gem 'simplecov', '~> 0.9.1'
   gem 'webmock', '~> 1.21.0'
+end
+
+group :production do
+  gem 'bugsnag'
 end

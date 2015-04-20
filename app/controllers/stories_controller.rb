@@ -5,7 +5,7 @@ class StoriesController < ApplicationController
   def index
     @stories = Story.all.paginated(params[:limit], params[:page])
     respond_to do |format|
-      format.json { render json: @stories }
+      format.json { render json: @stories, meta: { total: Story.count } }
     end
   end
 
