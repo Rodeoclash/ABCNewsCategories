@@ -4,6 +4,7 @@ class StoriesController < ApplicationController
 
   def index
     @stories = Story.all.paginated(params[:limit], params[:page])
+
     respond_to do |format|
       format.json { render json: @stories, meta: { total: Story.count } }
     end
@@ -13,13 +14,20 @@ class StoriesController < ApplicationController
     params[:items].each {|details|
       @story = Story.create!({details: details})
     }
+
     respond_to do |format|
       format.json { render nothing: true }
     end
   end
 
   def interest
-    @story_user = StoryUser.new({story_id: params[:story_id], user_id: @current_user.id, interest: params[:interest]})
+    @story_user = StoryUser.find_or_initialize_by({
+      story_id: params[:story_id],
+      user_id: @current_user.id
+    })
+
+    @story_user.interest = params[:interest]
+
     if @story_user.save
       respond_to do |format|
         format.json { render json: @story_user }

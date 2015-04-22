@@ -4,7 +4,8 @@
                  [reagent "0.5.0"]
                  [re-frame "0.3.1"]
                  [figwheel "0.2.6"]
-                 [cljs-ajax "0.3.11"]]
+                 [cljs-ajax "0.3.11"]
+                 [clj-stacktrace "0.2.5"]]
 
   :plugins [[lein-cljsbuild "1.0.4"]
             [lein-figwheel "0.2.3-SNAPSHOT"]]

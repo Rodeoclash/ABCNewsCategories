@@ -6,13 +6,28 @@ class Story < ActiveRecord::Base
 
   validates_presence_of :details
 
+  has_many :story_users
   has_many :users, through: :story_user
 
   default_scope { order('created_at DESC') }
   scope :paginated, -> (limit, page) { limit(limit && limit.to_i || 10).offset((page && page.to_i || 0) * (limit && limit.to_i || 10)) }
 
+  def title
+    details['title']
+  end
+
+  def summary
+    analysis['summary']
+  end
+
   def permalink
-    details["permalinkUrl"]
+    details['permalinkUrl']
+  end
+
+  def image(ratio='4x3')
+    details['standardLinks']['enclosure'].find {|item|
+      item['href'].include?(ratio)
+    }['href']
   end
 
   def get_remote_text

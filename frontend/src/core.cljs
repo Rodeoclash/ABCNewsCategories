@@ -21,30 +21,62 @@
 
 
 (def request-options                                                            ;; defaults used for all requests
-  {:response-format :json                                   
-   :keywords? true
-   :headers {
-     :authorization (str "Token token=" (get-auth-token))
-    }})
+  {:format :json
+   :response-format :json                                   
+   :keywords? true})
+
+
+(defn auth-header                                                               ;; adds the auth token header to the request
+  []
+  {:headers {
+    :Authorization (str "Token token=" (get-auth-token))}})
 
 
 (def initial-state                                                              
-  {:auth-token (get-auth-token)})  
+  {:current-user {}})  
 
 
 ;; -- Ajax --------------------------------------------------------------------
 
 
-(defn fetch-auth-token                                                           ;; gets an auth token by creating a user on the server
+(defn create-user                                                       ;; gets an auth token by creating a user on the server
   []
-  (POST "/users.json" (merge {:handler #(dispatch [:fetched-auth-token %])}
-                              request-options)))
+  (POST "/users.json"
+        (merge {:handler #(dispatch [:created-user %])}
+               request-options)))
                                          
+
+;; TODO - Get current user
+(defn get-current-user                                                          ;; returns last ten stories in system
+  []
+  (GET "/current_user.json"
+       (merge {:handler #(dispatch [:fetched-current-user %])}
+              (auth-header)
+              request-options)))
+
 
 (defn get-stories                                                               ;; returns last ten stories in system
   []
-  (GET "/stories.json" (merge {:handler #(dispatch [:fetched-stories %])}
-                               request-options)))
+  (GET "/stories.json"
+       (merge {:handler #(dispatch [:fetched-stories %])}
+              {:params {
+                :page 0
+                :limit 1000
+              }}
+              (auth-header)
+              request-options)))
+
+
+(defn create-story-user-interest                                                     ;; sets interest level in a story
+  [story interest-amount]
+  (POST (str "/stories/" (:id story) "/interest.json")
+        (merge {:handler #(dispatch [:created-story-user-interest %])}
+               {:params {
+                  :story_id (:id story)
+                  :interest interest-amount
+               }}
+               (auth-header)
+               request-options)))
 
 
 ;; -- Event Handlers ----------------------------------------------------------
@@ -55,19 +87,49 @@
   (fn 
     [db _]
     (if (nil? (get-auth-token))
-        (fetch-auth-token)                                                      ;; get a new token from the server
-        (get-stories))                                                          ;; otherwise let the app know we have an auth token to work with
+        (dispatch [:create-user])                                               ;; get a new token from the server
+        (dispatch [:fetch-stories]))                                                          ;; get current stories
     (merge db initial-state)))                                                  ;; what it returns becomes the new state
 
 
 (register-handler
-  :fetched-auth-token
+  :create-user
   (fn
-    [db [_ value]]
-    (let [auth-token-value (:auth_token value)]
-      (set-auth-token auth-token-value)
+    [db [_]]
+      (create-user) 
+      db))
+
+(register-handler
+  :created-user
+  (fn
+    [db [_ user]]
+      (set-auth-token (get-in user [:user :auth_token]))
+      (dispatch-sync [:fetched-current-user user])
       (get-stories)
-      (assoc db :auth-token auth-token-value))))
+      db))
+
+
+(register-handler
+  :fetch-current-user
+  (fn
+    [db [_]]
+      (get-current-user)
+      db))
+
+
+(register-handler
+  :fetched-current-user
+  (fn
+    [db [_ user]]
+    (assoc db :current-user (:user user))))
+
+
+(register-handler
+  :fetch-stories
+  (fn
+    [db [_]]
+      (get-stories)
+      db))
 
 
 (register-handler
@@ -77,44 +139,104 @@
     (assoc db :stories (:stories stories))))
 
 
+(register-handler
+  :create-story-user-interest
+  (fn
+    [db [_ story interest-amount]]
+    (create-story-user-interest story interest-amount)
+    db))
+
+
+(register-handler
+  :created-story-user-interest
+  (fn
+    [db [_ story-user]]
+    (dispatch [:fetch-current-user])
+    db))
+
+
 ;; -- Subscription Handlers ---------------------------------------------------
-
-
-(register-sub
-  :timer
-  (fn 
-    [db _]                       ;; db is the app-db atom
-    (reaction (:timer @db))))    ;; wrap the compitation in a reaction
-
-
-(register-sub
-  :time-color
-  (fn 
-    [db _]
-    (reaction (:time-color @db))))
 
 
 (register-sub
   :current-state
   (fn 
-    [db _]
+    [db _]                                                                      
     (reaction @db)))
+
+
+(register-sub
+  :stories
+  (fn 
+    [db _]                                                                      
+    (reaction (:stories @db))))                                                 
+
+
+(register-sub
+  :current-user
+  (fn 
+    [db _]
+    (reaction (:current-user @db))))
+
+
+(register-sub
+  :story-users
+  (fn 
+    [db attrs]
+    (let [current-user (subscribe [:current-user])]
+      (reaction (get-in @current-user [:story_users])))))                                                                    
 
 
 ;; -- View Components ---------------------------------------------------------
 
+
+(defn debug-output                                                              ;; expects deferenced data, simply outputs stringified object to screen
+  [state]
+  [:pre (.stringify js/JSON (clj->js state) nil 2)])
+
+
+(defn story-item
+  [story story-user]
+  (let [story-id (:id story)]
+    ^{:key story-id}
+    [:div
+      [:h2 (:title story)]
+      [:h4 "Summary"]
+      [:p (:summary story)]
+      [:h4 "Image"]
+      [:img {:src (:image story) :width "300px"}]
+      [:h4 (str "Interest " (:interest story-user))]
+      [:button
+        {:on-click #(dispatch [:create-story-user-interest story 1])}
+        "Set interest (1)"]
+      [:button
+        {:on-click #(dispatch [:create-story-user-interest story 0.25])}
+        "Set interest (0.25)"]]))
+
+
 (defn current-state
   []
-  (let [state (subscribe [:current-state])]
-    [:pre (.stringify js/JSON (clj->js @state) nil 2)]))
+  (let [state @(subscribe [:current-state])]
+    [debug-output state]))
+
+
+(defn stories-list
+  []
+  (let [stories @(subscribe [:stories])
+        story-users @(subscribe [:story-users])]
+    [:div
+      (for [story stories]
+        (story-item story (first (filter #(= (:id story) (:story_id %)) story-users))))]))
 
 
 (defn simple-example
   []
   [:div
+    [:h1 "Stories"]
+    [stories-list]
+    [:hr]
+    [:h1 "Client side state"]
     [current-state]])
-   ;[clock]
-   ;[color-input]])
 
 
 ;; -- Entry Point -------------------------------------------------------------
