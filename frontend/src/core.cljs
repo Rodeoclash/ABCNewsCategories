@@ -208,10 +208,19 @@
       [:h4 (str "Interest " (:interest story-user))]
       [:button
         {:on-click #(dispatch [:create-story-user-interest story 1])}
-        "Set interest (1)"]
+        "Set interest (0)"]
       [:button
         {:on-click #(dispatch [:create-story-user-interest story 0.25])}
-        "Set interest (0.25)"]]))
+        "Set interest (0.25)"]
+      [:button
+        {:on-click #(dispatch [:create-story-user-interest story 0.50])}
+        "Set interest (0.50)"]
+      [:button
+        {:on-click #(dispatch [:create-story-user-interest story 0.75])}
+        "Set interest (0.75)"]
+      [:button
+        {:on-click #(dispatch [:create-story-user-interest story 1.00])}
+        "Set interest (1.00)"]]))
 
 
 (defn current-state
