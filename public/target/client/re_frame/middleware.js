@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 0.0-2816 {:elide-asserts true}
+// Compiled by ClojureScript 0.0-2816 {}
 goog.provide('re_frame.middleware');
 goog.require('cljs.core');
 goog.require('clojure.data');
@@ -18,50 +18,43 @@ goog.require('reagent.ratom');
 */
 re_frame.middleware.pure = (function pure(handler){
 return (function pure_handler(app_db,event_vec){
-if(!((function (){var G__23742 = app_db;
-if(G__23742){
-var bit__4487__auto__ = null;
-if(cljs.core.truth_((function (){var or__3806__auto__ = bit__4487__auto__;
-if(cljs.core.truth_(or__3806__auto__)){
-return or__3806__auto__;
+if(!((function (){var G__27242 = app_db;
+if(G__27242){
+var bit__13454__auto__ = null;
+if(cljs.core.truth_((function (){var or__12773__auto__ = bit__13454__auto__;
+if(cljs.core.truth_(or__12773__auto__)){
+return or__12773__auto__;
 } else {
-return G__23742.reagent$ratom$IReactiveAtom$;
+return G__27242.reagent$ratom$IReactiveAtom$;
 }
 })())){
 return true;
 } else {
-if((!G__23742.cljs$lang$protocol_mask$partition$)){
-return cljs.core.native_satisfies_QMARK_(reagent.ratom.IReactiveAtom,G__23742);
+if((!G__27242.cljs$lang$protocol_mask$partition$)){
+return cljs.core.native_satisfies_QMARK_.call(null,reagent.ratom.IReactiveAtom,G__27242);
 } else {
 return false;
 }
 }
 } else {
-return cljs.core.native_satisfies_QMARK_(reagent.ratom.IReactiveAtom,G__23742);
+return cljs.core.native_satisfies_QMARK_.call(null,reagent.ratom.IReactiveAtom,G__27242);
 }
 })())){
-if(cljs.core.map_QMARK_(app_db)){
-re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: Looks like \"pure\" is in the middleware pipeline twice. Ignoring."], 0));
+if(cljs.core.map_QMARK_.call(null,app_db)){
+re_frame.utils.warn.call(null,"re-frame: Looks like \"pure\" is in the middleware pipeline twice. Ignoring.");
 } else {
-re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: \"pure\" middleware not given a Ratom.  Got: ",app_db], 0));
+re_frame.utils.warn.call(null,"re-frame: \"pure\" middleware not given a Ratom.  Got: ",app_db);
 }
 
 return handler;
 } else {
-var db = (function (){var G__23743 = app_db;
-return (cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(G__23743) : cljs.core.deref.call(null,G__23743));
-})();
-var new_db = (function (){var G__23744 = db;
-var G__23745 = event_vec;
-return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$arity$2(G__23744,G__23745) : handler.call(null,G__23744,G__23745));
-})();
+var db = cljs.core.deref.call(null,app_db);
+var new_db = handler.call(null,db,event_vec);
 if((new_db == null)){
-return re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: your pure handler returned nil. It should return the new db state."], 0));
+return re_frame.utils.warn.call(null,"re-frame: your pure handler returned nil. It should return the new db state.");
 } else {
 if(!((db === new_db))){
-var G__23746 = app_db;
-var G__23747 = new_db;
-return (cljs.core.reset_BANG_.cljs$core$IFn$_invoke$arity$2 ? cljs.core.reset_BANG_.cljs$core$IFn$_invoke$arity$2(G__23746,G__23747) : cljs.core.reset_BANG_.call(null,G__23746,G__23747));
+return cljs.core.reset_BANG_.call(null,app_db,new_db);
 } else {
 return null;
 }
@@ -81,10 +74,8 @@ return null;
 */
 re_frame.middleware.log_ex = (function log_ex(handler){
 return (function log_ex_handler(db,v){
-try{var G__23758 = db;
-var G__23759 = v;
-return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$arity$2(G__23758,G__23759) : handler.call(null,G__23758,G__23759));
-}catch (e23757){var e = e23757;
+try{return handler.call(null,db,v);
+}catch (e27246){var e = e27246;
 console.error(e.stack);
 
 throw e;
@@ -97,20 +88,17 @@ throw e;
 */
 re_frame.middleware.debug = (function debug(handler){
 return (function debug_handler(db,v){
-re_frame.utils.log.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["-- New Event ----------------------------------------------------"], 0));
+re_frame.utils.log.call(null,"-- New Event ----------------------------------------------------");
 
-re_frame.utils.group.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame event: ",v], 0));
+re_frame.utils.group.call(null,"re-frame event: ",v);
 
-var new_db = (function (){var G__23766 = db;
-var G__23767 = v;
-return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$arity$2(G__23766,G__23767) : handler.call(null,G__23766,G__23767));
-})();
-var diff = clojure.data.diff(db,new_db);
-re_frame.utils.log.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["only before: ",cljs.core.first(diff)], 0));
+var new_db = handler.call(null,db,v);
+var diff = clojure.data.diff.call(null,db,new_db);
+re_frame.utils.log.call(null,"only before: ",cljs.core.first.call(null,diff));
 
-re_frame.utils.log.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["only after : ",cljs.core.second(diff)], 0));
+re_frame.utils.log.call(null,"only after : ",cljs.core.second.call(null,diff));
 
-re_frame.utils.groupEnd();
+re_frame.utils.groupEnd.call(null);
 
 return new_db;
 });
@@ -126,9 +114,7 @@ return new_db;
 */
 re_frame.middleware.trim_v = (function trim_v(handler){
 return (function trim_v_handler(db,v){
-var G__23774 = db;
-var G__23775 = cljs.core.vec(cljs.core.rest(v));
-return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$arity$2(G__23774,G__23775) : handler.call(null,G__23774,G__23775));
+return handler.call(null,db,cljs.core.vec.call(null,cljs.core.rest.call(null,v)));
 });
 });
 /**
@@ -145,16 +131,13 @@ return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$ar
 */
 re_frame.middleware.path = (function() { 
 var path__delegate = function (args){
-var path__$1 = cljs.core.flatten(args);
-var _ = ((cljs.core.empty_QMARK_(path__$1))?re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: path middleware given no params. Probably a mistake."], 0)):null);
+var path__$1 = cljs.core.flatten.call(null,args);
+var _ = ((cljs.core.empty_QMARK_.call(null,path__$1))?re_frame.utils.warn.call(null,"re-frame: path middleware given no params. Probably a mistake."):null);
 return ((function (path__$1,_){
 return (function middleware(handler){
 return ((function (path__$1,_){
 return (function path_handler(db,v){
-return cljs.core.assoc_in(db,path__$1,(function (){var G__23790 = cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(db,path__$1);
-var G__23791 = v;
-return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$arity$2(G__23790,G__23791) : handler.call(null,G__23790,G__23791));
-})());
+return cljs.core.assoc_in.call(null,db,path__$1,handler.call(null,cljs.core.get_in.call(null,db,path__$1),v));
 });
 ;})(path__$1,_))
 });
@@ -163,14 +146,14 @@ return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$ar
 var path = function (var_args){
 var args = null;
 if (arguments.length > 0) {
-var G__23792__i = 0, G__23792__a = new Array(arguments.length -  0);
-while (G__23792__i < G__23792__a.length) {G__23792__a[G__23792__i] = arguments[G__23792__i + 0]; ++G__23792__i;}
-  args = new cljs.core.IndexedSeq(G__23792__a,0);
+var G__27247__i = 0, G__27247__a = new Array(arguments.length -  0);
+while (G__27247__i < G__27247__a.length) {G__27247__a[G__27247__i] = arguments[G__27247__i + 0]; ++G__27247__i;}
+  args = new cljs.core.IndexedSeq(G__27247__a,0);
 } 
 return path__delegate.call(this,args);};
 path.cljs$lang$maxFixedArity = 0;
-path.cljs$lang$applyTo = (function (arglist__23793){
-var args = cljs.core.seq(arglist__23793);
+path.cljs$lang$applyTo = (function (arglist__27248){
+var args = cljs.core.seq(arglist__27248);
 return path__delegate(args);
 });
 path.cljs$core$IFn$_invoke$arity$variadic = path__delegate;
@@ -187,16 +170,11 @@ return path;
 re_frame.middleware.undoable = (function undoable(explanation){
 return (function middleware(handler){
 return (function undoable_handler(db,event_vec){
-var explanation__$1 = ((cljs.core.fn_QMARK_(explanation))?(function (){var G__23822 = db;
-var G__23823 = event_vec;
-return (explanation.cljs$core$IFn$_invoke$arity$2 ? explanation.cljs$core$IFn$_invoke$arity$2(G__23822,G__23823) : explanation.call(null,G__23822,G__23823));
-})():((typeof explanation === 'string')?explanation:(((explanation == null))?"":re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: undoable given a bad parameter. Got: ",explanation], 0))
+var explanation__$1 = ((cljs.core.fn_QMARK_.call(null,explanation))?explanation.call(null,db,event_vec):((typeof explanation === 'string')?explanation:(((explanation == null))?"":re_frame.utils.warn.call(null,"re-frame: undoable given a bad parameter. Got: ",explanation)
 )));
-re_frame.undo.store_now_BANG_(explanation__$1);
+re_frame.undo.store_now_BANG_.call(null,explanation__$1);
 
-var G__23824 = db;
-var G__23825 = event_vec;
-return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$arity$2(G__23824,G__23825) : handler.call(null,G__23824,G__23825));
+return handler.call(null,db,event_vec);
 });
 });
 });
@@ -222,12 +200,7 @@ return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$ar
 re_frame.middleware.enrich = (function enrich(f){
 return (function middleware(handler){
 return (function enrich_handler(db,v){
-var G__23854 = (function (){var G__23856 = db;
-var G__23857 = v;
-return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$arity$2(G__23856,G__23857) : handler.call(null,G__23856,G__23857));
-})();
-var G__23855 = v;
-return (f.cljs$core$IFn$_invoke$arity$2 ? f.cljs$core$IFn$_invoke$arity$2(G__23854,G__23855) : f.call(null,G__23854,G__23855));
+return f.call(null,handler.call(null,db,v),v);
 });
 });
 });
@@ -242,15 +215,12 @@ return (f.cljs$core$IFn$_invoke$arity$2 ? f.cljs$core$IFn$_invoke$arity$2(G__238
 re_frame.middleware.after = (function after(f){
 return (function middleware(handler){
 return (function after_handler(db,v){
-var new_db = (function (){var G__23886 = db;
-var G__23887 = v;
-return (handler.cljs$core$IFn$_invoke$arity$2 ? handler.cljs$core$IFn$_invoke$arity$2(G__23886,G__23887) : handler.call(null,G__23886,G__23887));
-})();
-var G__23888_23890 = new_db;
-var G__23889_23891 = v;
-(f.cljs$core$IFn$_invoke$arity$2 ? f.cljs$core$IFn$_invoke$arity$2(G__23888_23890,G__23889_23891) : f.call(null,G__23888_23890,G__23889_23891));
+var new_db = handler.call(null,db,v);
+f.call(null,new_db,v);
 
 return new_db;
 });
 });
 });
+
+//# sourceMappingURL=middleware.js.map?rel=1429705618675
