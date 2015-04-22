@@ -18,7 +18,8 @@
                                       {:main abcnews.dev
                                        :optimizations :none
                                        :source-map true
-                                       :source-map-timestamp true}}}}}
+                                       :source-map-timestamp true
+                                       :output-dir "target/client"}}}}}
 
              :prod {:cljsbuild
                     {:builds {:client {:compiler
@@ -30,5 +31,4 @@
 
   :cljsbuild {:builds {:client {:source-paths ["src"]
                                 :compiler
-                                {:output-dir "target/client"
-                                 :output-to "target/client.js"}}}})
+                                {:output-to "target/client.js"}}}})

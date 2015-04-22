@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 0.0-2816 {}
+// Compiled by ClojureScript 0.0-2816 {:elide-asserts true}
 goog.provide('re_frame.handlers');
 goog.require('cljs.core');
 goog.require('re_frame.utils');
@@ -12,30 +12,34 @@ goog.require('re_frame.db');
 * 
 */
 re_frame.handlers.comp_middleware = (function comp_middleware(v){
-if(cljs.core.fn_QMARK_.call(null,v)){
+if(cljs.core.fn_QMARK_(v)){
 return v;
 } else {
-if(cljs.core.vector_QMARK_.call(null,v)){
-var v__$1 = cljs.core.remove.call(null,cljs.core.nil_QMARK_,cljs.core.flatten.call(null,v));
-if(cljs.core.empty_QMARK_.call(null,v__$1)){
+if(cljs.core.vector_QMARK_(v)){
+var v__$1 = cljs.core.remove.cljs$core$IFn$_invoke$arity$2(cljs.core.nil_QMARK_,cljs.core.flatten(v));
+if(cljs.core.empty_QMARK_(v__$1)){
 return cljs.core.identity;
 } else {
-if(cljs.core._EQ_.call(null,(1),cljs.core.count.call(null,v__$1))){
-return cljs.core.first.call(null,v__$1);
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((1),cljs.core.count(v__$1))){
+return cljs.core.first(v__$1);
 } else {
-return cljs.core.apply.call(null,cljs.core.comp,v__$1);
+return cljs.core.apply.cljs$core$IFn$_invoke$arity$2(cljs.core.comp,v__$1);
 
 }
 }
 } else {
-return re_frame.utils.warn.call(null,"re-frame: comp-middleware expects a vector, got: ",v);
+return re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: comp-middleware expects a vector, got: ",v], 0));
 
 }
 }
 });
-re_frame.handlers.id__GT_fn = cljs.core.atom.call(null,cljs.core.PersistentArrayMap.EMPTY);
+re_frame.handlers.id__GT_fn = (function (){var G__24133 = cljs.core.PersistentArrayMap.EMPTY;
+return (cljs.core.atom.cljs$core$IFn$_invoke$arity$1 ? cljs.core.atom.cljs$core$IFn$_invoke$arity$1(G__24133) : cljs.core.atom.call(null,G__24133));
+})();
 re_frame.handlers.lookup_handler = (function lookup_handler(event_id){
-return cljs.core.get.call(null,cljs.core.deref.call(null,re_frame.handlers.id__GT_fn),event_id);
+return cljs.core.get.cljs$core$IFn$_invoke$arity$2((function (){var G__24135 = re_frame.handlers.id__GT_fn;
+return (cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(G__24135) : cljs.core.deref.call(null,G__24135));
+})(),event_id);
 });
 /**
 * register a handler for an event.
@@ -45,17 +49,21 @@ return cljs.core.get.call(null,cljs.core.deref.call(null,re_frame.handlers.id__G
 re_frame.handlers.register_base = (function() {
 var register_base = null;
 var register_base__2 = (function (event_id,handler_fn){
-if(cljs.core.contains_QMARK_.call(null,cljs.core.deref.call(null,re_frame.handlers.id__GT_fn),event_id)){
-re_frame.utils.warn.call(null,"re-frame: overwriting an event-handler for: ",event_id);
+if(cljs.core.contains_QMARK_((function (){var G__24140 = re_frame.handlers.id__GT_fn;
+return (cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(G__24140) : cljs.core.deref.call(null,G__24140));
+})(),event_id)){
+re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: overwriting an event-handler for: ",event_id], 0));
 } else {
 }
 
-return cljs.core.swap_BANG_.call(null,re_frame.handlers.id__GT_fn,cljs.core.assoc,event_id,handler_fn);
+return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(re_frame.handlers.id__GT_fn,cljs.core.assoc,event_id,handler_fn);
 });
 var register_base__3 = (function (event_id,middleware,handler_fn){
-var mid_ware = re_frame.handlers.comp_middleware.call(null,middleware);
-var hander_fn = mid_ware.call(null,handler_fn);
-return register_base.call(null,event_id,hander_fn);
+var mid_ware = re_frame.handlers.comp_middleware(middleware);
+var hander_fn = (function (){var G__24141 = handler_fn;
+return (mid_ware.cljs$core$IFn$_invoke$arity$1 ? mid_ware.cljs$core$IFn$_invoke$arity$1(G__24141) : mid_ware.call(null,G__24141));
+})();
+return register_base.cljs$core$IFn$_invoke$arity$2(event_id,hander_fn);
 });
 register_base = function(event_id,middleware,handler_fn){
 switch(arguments.length){
@@ -81,13 +89,13 @@ return register_base;
 * To write pure handlers, use the "pure" middleware when registering the handler.
 */
 re_frame.handlers.handle = (function handle(event_v){
-var event_id = re_frame.utils.first_in_vector.call(null,event_v);
-var handler_fn = re_frame.handlers.lookup_handler.call(null,event_id);
+var event_id = re_frame.utils.first_in_vector(event_v);
+var handler_fn = re_frame.handlers.lookup_handler(event_id);
 if((handler_fn == null)){
-return re_frame.utils.warn.call(null,"re-frame: no event handler registered for: \"",event_id,"\". Ignoring.");
+return re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: no event handler registered for: \"",event_id,"\". Ignoring."], 0));
 } else {
-return handler_fn.call(null,re_frame.db.app_db,event_v);
+var G__24144 = re_frame.db.app_db;
+var G__24145 = event_v;
+return (handler_fn.cljs$core$IFn$_invoke$arity$2 ? handler_fn.cljs$core$IFn$_invoke$arity$2(G__24144,G__24145) : handler_fn.call(null,G__24144,G__24145));
 }
 });
-
-//# sourceMappingURL=handlers.js.map?rel=1429446761404

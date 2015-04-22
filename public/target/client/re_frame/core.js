@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 0.0-2816 {}
+// Compiled by ClojureScript 0.0-2816 {:elide-asserts true}
 goog.provide('re_frame.core');
 goog.require('cljs.core');
 goog.require('re_frame.middleware');
@@ -16,13 +16,14 @@ re_frame.core.path = re_frame.middleware.path;
 re_frame.core.enrich = re_frame.middleware.enrich;
 re_frame.core.trim_v = re_frame.middleware.trim_v;
 re_frame.core.after = re_frame.middleware.after;
+re_frame.core.log_ex = re_frame.middleware.log_ex;
 re_frame.core.register_handler = (function() {
 var register_handler = null;
 var register_handler__2 = (function (id,handler){
-return re_frame.handlers.register_base.call(null,id,re_frame.core.pure,handler);
+return re_frame.handlers.register_base.cljs$core$IFn$_invoke$arity$3(id,re_frame.core.pure,handler);
 });
 var register_handler__3 = (function (id,middleware,handler){
-return re_frame.handlers.register_base.call(null,id,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_frame.core.pure,middleware], null),handler);
+return re_frame.handlers.register_base.cljs$core$IFn$_invoke$arity$3(id,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [re_frame.core.pure,middleware], null),handler);
 });
 register_handler = function(id,middleware,handler){
 switch(arguments.length){
@@ -38,5 +39,3 @@ register_handler.cljs$core$IFn$_invoke$arity$3 = register_handler__3;
 return register_handler;
 })()
 ;
-
-//# sourceMappingURL=core.js.map?rel=1429446761079
