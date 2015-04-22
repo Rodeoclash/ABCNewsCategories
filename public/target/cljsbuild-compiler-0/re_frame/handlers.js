@@ -33,12 +33,12 @@ return re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_
 }
 }
 });
-re_frame.handlers.id__GT_fn = (function (){var G__24137 = cljs.core.PersistentArrayMap.EMPTY;
-return (cljs.core.atom.cljs$core$IFn$_invoke$arity$1 ? cljs.core.atom.cljs$core$IFn$_invoke$arity$1(G__24137) : cljs.core.atom.call(null,G__24137));
+re_frame.handlers.id__GT_fn = (function (){var G__24141 = cljs.core.PersistentArrayMap.EMPTY;
+return (cljs.core.atom.cljs$core$IFn$_invoke$arity$1 ? cljs.core.atom.cljs$core$IFn$_invoke$arity$1(G__24141) : cljs.core.atom.call(null,G__24141));
 })();
 re_frame.handlers.lookup_handler = (function lookup_handler(event_id){
-return cljs.core.get.cljs$core$IFn$_invoke$arity$2((function (){var G__24139 = re_frame.handlers.id__GT_fn;
-return (cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(G__24139) : cljs.core.deref.call(null,G__24139));
+return cljs.core.get.cljs$core$IFn$_invoke$arity$2((function (){var G__24143 = re_frame.handlers.id__GT_fn;
+return (cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(G__24143) : cljs.core.deref.call(null,G__24143));
 })(),event_id);
 });
 /**
@@ -49,8 +49,8 @@ return (cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$cor
 re_frame.handlers.register_base = (function() {
 var register_base = null;
 var register_base__2 = (function (event_id,handler_fn){
-if(cljs.core.contains_QMARK_((function (){var G__24144 = re_frame.handlers.id__GT_fn;
-return (cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(G__24144) : cljs.core.deref.call(null,G__24144));
+if(cljs.core.contains_QMARK_((function (){var G__24148 = re_frame.handlers.id__GT_fn;
+return (cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(G__24148) : cljs.core.deref.call(null,G__24148));
 })(),event_id)){
 re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: overwriting an event-handler for: ",event_id], 0));
 } else {
@@ -60,8 +60,8 @@ return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(re_frame.handlers.id__
 });
 var register_base__3 = (function (event_id,middleware,handler_fn){
 var mid_ware = re_frame.handlers.comp_middleware(middleware);
-var hander_fn = (function (){var G__24145 = handler_fn;
-return (mid_ware.cljs$core$IFn$_invoke$arity$1 ? mid_ware.cljs$core$IFn$_invoke$arity$1(G__24145) : mid_ware.call(null,G__24145));
+var hander_fn = (function (){var G__24149 = handler_fn;
+return (mid_ware.cljs$core$IFn$_invoke$arity$1 ? mid_ware.cljs$core$IFn$_invoke$arity$1(G__24149) : mid_ware.call(null,G__24149));
 })();
 return register_base.cljs$core$IFn$_invoke$arity$2(event_id,hander_fn);
 });
@@ -94,8 +94,8 @@ var handler_fn = re_frame.handlers.lookup_handler(event_id);
 if((handler_fn == null)){
 return re_frame.utils.warn.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["re-frame: no event handler registered for: \"",event_id,"\". Ignoring."], 0));
 } else {
-var G__24148 = re_frame.db.app_db;
-var G__24149 = event_v;
-return (handler_fn.cljs$core$IFn$_invoke$arity$2 ? handler_fn.cljs$core$IFn$_invoke$arity$2(G__24148,G__24149) : handler_fn.call(null,G__24148,G__24149));
+var G__24152 = re_frame.db.app_db;
+var G__24153 = event_v;
+return (handler_fn.cljs$core$IFn$_invoke$arity$2 ? handler_fn.cljs$core$IFn$_invoke$arity$2(G__24152,G__24153) : handler_fn.call(null,G__24152,G__24153));
 }
 });
