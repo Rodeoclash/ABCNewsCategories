@@ -97,4 +97,4 @@ details_text_analysis:
   text: "Some content that was fetched from remote server. Â"
   semantria_id: "61bb802e-5f1a-4b91-86a7-1cc5ace2d928"
   analysis: >
-    {"todo":"this"}
+    {"summary":"Some details... about the summary... of the article..."}

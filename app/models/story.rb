@@ -9,7 +9,7 @@ class Story < ActiveRecord::Base
   has_many :story_users
   has_many :users, through: :story_user
 
-  default_scope { order('created_at DESC') }
+  default_scope { order('created_at DESC').where.not({analysis: nil, text: nil}) }
   scope :paginated, -> (limit, page) { limit(limit && limit.to_i || 10).offset((page && page.to_i || 0) * (limit && limit.to_i || 10)) }
 
   def title
