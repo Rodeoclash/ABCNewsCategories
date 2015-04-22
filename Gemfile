@@ -12,6 +12,7 @@ gem 'awesome_print', '1.6.1'
 gem 'sass-rails', '5.0.3'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'active_model_serializers', '0.8.3'
+gem 'uglifier', '2.7.1'
 
 group :development, :test do
   gem 'byebug', '~> 4.0.5'
