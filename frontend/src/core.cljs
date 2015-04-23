@@ -209,7 +209,7 @@
       [:img {:src (:image story) :width "300px"}]
       [:h4 (str "Interest " (:interest story-user))]
       [:button
-        {:on-click #(dispatch [:create-story-user-interest story 1])}
+        {:on-click #(dispatch [:create-story-user-interest story 0])}
         "Set interest (0)"]
       [:button
         {:on-click #(dispatch [:create-story-user-interest story 0.25])}
